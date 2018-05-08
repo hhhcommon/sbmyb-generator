@@ -1,0 +1,20 @@
+package ${package};
+
+import java.util.List;
+import com.jfinal.aop.Enhancer;
+import ${package}.${className};
+import com.jfcf.core.kit.SqlKit;
+import com.jfcf.core.dao.BaseDao;
+/**
+ * ${colunmList[0].table_desc} dao
+ * 所有增删改查操作必须在dao中完成，
+ * 禁止在service和controller直接使用 Db.*  Model.dao.方式
+ * @author ducongcong
+ */
+public class ${className}Dao extends BaseDao {
+
+	
+	public static final ${className}Dao me= Enhancer.enhance(${className}Dao.class);
+	
+	
+}

@@ -1,0 +1,51 @@
+package ${package};
+import com.jfcf.core.annotation.Controller;
+import com.jfcf.core.controller.BasePageController;
+import ${package}.${className}Service;
+import ${package}.${className};
+import com.jfinal.plugin.activerecord.Model;
+import com.jfcf.core.dto.ResultData;
+import com.jfcf.core.utils.ResultDataUtil;
+/**
+ * Controller 中只能调用service，禁止调用dao层和jfinal的Db.* 和Model.me.*操作数据库  代码生成 
+ * ${colunmList[0].table_desc} Controller
+ * @author ducongcong
+ */
+ @SuppressWarnings("rawtypes")
+ @Controller("/${classNameSmall}")
+public class ${className}Controller extends BasePageController {
+    @Override
+	protected Class<? extends Model> getClazz() {
+		return ${className}.class;
+	}
+	
+	/**
+	 * 列表
+	 * @author ducongcong
+	 * @updateDate
+	 */
+	public void list(){
+		this.initPage();
+		${className}Service.me.paging(${dataSource}, splitPage, ${className}.getXmlSql("splitPageSelect"), ${className}.getXmlSql("splitPageFrom"));
+		setAttr("page", this.splitPage);
+		render(getPrefix()+"list.html");
+	}
+ 	/**
+	 * 批量删除
+	 * @author ducongcong
+	 * @updateDate
+	 */
+	public void deleteByIds(){
+		ResultData resultData = null;
+		String ids = getPara("ids");
+		try {
+			${className}Service.me.deleteByIds(ids);
+			resultData = ResultDataUtil.successResult();
+		} catch (Exception e) {
+			logger.error("删除异常",e);
+			resultData= ResultDataUtil.errorResult();
+		}
+		renderJson(resultData);
+	}
+	
+}

@@ -1,0 +1,59 @@
+package ${package};
+
+import com.jfinal.plugin.activerecord.Model;
+
+<% for(dataType in dataTypes){ %>
+import ${dataType}; 
+<% } %>
+
+/**
+ * model 只能在dao层中使用
+ * ${colunmList[0].table_desc} model
+ * @author ducongcong
+ */
+public class ${className} extends Model<${className}> {
+
+	private static final long serialVersionUID = 6761767368352810428L;
+	/**
+	 * 表名称
+	 */
+	public static final String TABLENAME="${tableName}";
+	/**
+	 * 当前model，sql 命名空间常量
+	 */
+    private static final String NAMESPACE="${namespace}.${classNameSmall}.";
+    /**
+     * 获取用户定义sql的命名空间
+     * @param sqlId
+     * @return
+     */
+    public static String getXmlSql(String sqlId){
+    	return NAMESPACE+sqlId;
+    }
+   
+	
+	public static final ${className} me = new ${className}();
+	
+	<% for(colunm in colunmList){ %>
+	/**
+	 * 字段描述：${colunm.column_desc} 
+	 * 字段类型：${colunm.column_type}  ${isEmpty(colunm.column_length) ? "" : "长度：" + colunm.column_length}
+	 */
+	public static final String column_${colunm.column_name_t} = "${colunm.column_name}";
+	
+	<% } %>
+	
+	<% for(colunm in colunmList){ %>
+	private String ${colunm.column_name_t};
+	<% } %>
+	
+	<% for(colunm in colunmList){ %>
+	public void set${colunm.column_name_upperCaseFirstOne}(${colunm.column_className} ${colunm.column_name_t}){
+		set(column_${colunm.column_name_t}, ${colunm.column_name_t});
+	}
+	public ${colunm.column_className} get${colunm.column_name_upperCaseFirstOne}() {
+		return get(column_${colunm.column_name_t});
+	}
+	<% } %>
+	
+}

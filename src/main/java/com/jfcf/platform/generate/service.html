@@ -1,0 +1,21 @@
+package ${package};
+
+import java.util.List;
+import com.jfinal.aop.Enhancer;
+import ${package}.${className};
+import com.jfcf.core.service.BaseService;
+/**
+ * service中只能调用dao层，组合dao层的业务，添加事物等，目前不支持跨数据库事物，如需跨库，自己写事物补偿
+ * ${colunmList[0].table_desc} 服务
+ * @author ducongcong
+ */
+public class ${className}Service extends BaseService {
+
+	
+	public static final ${className}Service me= Enhancer.enhance(${className}Service.class);
+	
+	public ${className} findById(Long id){
+		return ${className}Dao.me.findById(id);
+	}
+	
+}

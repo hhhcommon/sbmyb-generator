@@ -1,0 +1,36 @@
+package ${package};
+
+import java.util.List;
+import ${package}.${className};
+import com.jfinal.aop.Enhancer;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfcf.core.kit.SqlKit;
+import com.jfcf.core.service.BaseService;
+/**
+ * 代码生成 
+ * ${colunmList[0].table_desc} Service
+ * @author ducongcong
+ */
+public class ${className}Service extends BaseService {
+
+	
+	public static final ${className}Service me= Enhancer.enhance(${className}Service.class);
+	/**
+	 * 查询全部，不使用，请删除
+	 */
+	public List<${className}> findAll(){
+	    return ${className}.dao.find(SqlKit.getSql(${className}.getXmlSql("findAll")));
+	}
+	/**
+	 * 批量删除（不使用，请删除）
+	 * @author ducongcong
+	 * @param ids 拼装的id
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteByIds(String ids) throws Exception{
+		String sql = getSql(${className}.getXmlSql("deleteByIds"));
+		sql= sql.replaceAll("#ids", ids);
+		return Db.update(sql);
+	}
+}

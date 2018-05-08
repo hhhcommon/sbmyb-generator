@@ -1,0 +1,28 @@
+<div class="modal-dialog ">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">修改</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal m-t" id="editform" >
+				<% for(colunm in colunmList){ %>
+				    <% if(colunmLP.index ==1){%>
+				      <input id="${colunm.column_name}"  name="${classNameSmall}.${colunm.column_name}" value="${dl}{model.${colunm.column_name}}" type="hidden" value=""/>
+				    <%} else{%>
+				    <div class="form-group">
+				        <label class="col-sm-3 control-label">${colunm.column_desc}</label>
+				        <div class="col-sm-8">
+				          	<input id="${colunm.column_name}" name="${classNameSmall}.${colunm.column_name}" value="${dl}{model.${colunm.column_name}!}" placeholder="请输入${colunm.column_desc}"  type="text" class="form-control" required="" aria-required="true">
+				        </div>
+				    </div>
+		            <% } %>
+			    <% } %>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="closeBtn" data-dismiss="modal" class="btn">关闭</button>
+			<button type="button" id="updateBtn" onclick="javascript:commonSave('${dl}{prefix}update','editform')" class="btn btn-primary">更新</button>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="modal-dialog ">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">查看</h4>
+		</div>
+		<div class="modal-body">
+		    <table class="table table-bordered">
+	             <tbody>
+		            <% for(colunm in colunmList){ %>
+		            <% if(colunmLP.index !=1){%>
+		            <tr>
+					    <td>${colunm.column_desc}</td>
+					    <td>${dl}{model.${colunm.column_name}!}</td>
+					</tr>
+					<% } %>
+				    <% } %>
+	             </tbody>
+	         </table>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="closeBtn" data-dismiss="modal" class="btn">关闭</button>
+		</div>
+    </div>
+</div>
+
